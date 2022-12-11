@@ -1,13 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import { FaBars } from 'react-icons/fa';
+import MobileMenu from '../components/MobileMenu';
 
 const pages = [
   { name: 'Home', route: '/' },
-  { name: 'About', route: '/about' },
-  { name: 'Connect', route: '/connect' }
+  { name: 'About', route: '/about' }
+  // { name: 'Connect', route: '/connect' }
 ];
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className="bg-white">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -19,6 +24,7 @@ export default function Header() {
                 alt="Headshot image"
                 width="25"
                 height="25"
+                className="hidden sm:block"
               />
               <span className="text-neutral-800 pl-2">
                 Lisa White | Software Engineer
@@ -37,9 +43,19 @@ export default function Header() {
                 ))}
               </div>
             </div>
+            <button
+              className="py-2 px-4 rounded sm:hidden"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Menu"
+            >
+              <div className="flex items-center">
+                <FaBars />
+              </div>
+            </button>
           </div>
         </div>
       </div>
+      <MobileMenu pages={pages} isOpen={isOpen} />
     </nav>
   );
 }
