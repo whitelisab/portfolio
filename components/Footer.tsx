@@ -9,7 +9,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="my-4">
+    <footer className="my-8">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-center items-center mb-2">
           <ul className="flex gap-4">
