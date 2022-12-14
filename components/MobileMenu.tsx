@@ -7,28 +7,20 @@ interface Page {
 
 interface Props {
   pages: Page[];
-  isOpen: boolean;
 }
 
-export default function MobileMenu({ pages, isOpen }: Props) {
+export default function MobileMenu({ pages }: Props) {
   return (
-    <>
-      {isOpen && (
-        <div className="mb-4 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <ul>
-            {pages.map((page) => (
-              <li key={page.name}>
-                <Link href={page.route} key={page.name}>
-                  <p className="text-neutral-800 px-2 py-2 text-md">
-                    {page.name}
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <hr />
-        </div>
-      )}
-    </>
+    <div className="fixed flex flex-col top-0 left-0 w-full px-10 z-10 h-screen pt-24 bg-white">
+      <ul className="w-full flex flex-col items-start">
+        {pages.map((page) => (
+          <li key={page.name}>
+            <Link href={page.route} key={page.name}>
+              <p className="text-neutral-800 px-2 py-2 text-md">{page.name}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

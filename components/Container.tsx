@@ -1,12 +1,37 @@
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import MobileMenu from '../components/MobileMenu';
 
 type Props = {
   children: React.ReactNode;
 };
 
+const pages = [
+  { name: 'Home', route: '/' },
+  { name: 'About', route: '/about' }
+];
+
 export default function Container({ children }: Props) {
+  const [overlayOpen, setOverlayOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    if (overlayOpen) {
+      setOverlayOpen(false);
+      document.body.style.overflow = '';
+    } else {
+      setOverlayOpen(true);
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  useEffect(() => {
+    return function cleanup() {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -15,7 +40,12 @@ export default function Container({ children }: Props) {
         <link rel="icon" href="/website-logo-small.png" />
       </Head>
       <div className="flex flex-col min-h-screen justify-between px-8">
-        <Header />
+        <Header
+          onMenuClick={handleMenuClick}
+          overlayOpen={overlayOpen}
+          pages={pages}
+        />
+        {overlayOpen && <MobileMenu pages={pages} />}
         <main className="flex justify-center">{children}</main>
         <Footer />
       </div>
