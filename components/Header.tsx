@@ -15,7 +15,7 @@ interface Props {
 export default function Header({ onMenuClick, overlayOpen, pages }: Props) {
   return (
     <nav className="bg-white z-20">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex">
             <Image

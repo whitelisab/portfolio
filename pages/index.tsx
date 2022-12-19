@@ -4,7 +4,7 @@ import Container from '../components/Container';
 export default function Home() {
   return (
     <Container>
-      <div className="flex flex-col justify-center sm:px-6 lg:px-8">
+      <div className="flex flex-col justify-center max-w-5xl sm:px-6 lg:px-8">
         <div className="flex flex-col items-center">
           <Image
             src="/headshot-resized.png"
