@@ -11,7 +11,7 @@ import Container from '../components/Container';
 export default function About() {
   return (
     <Container>
-      <div className="flex flex-col justify-center px-8 text-neutral-800 max-w-7xl">
+      <div className="flex flex-col justify-center px-8 text-neutral-800 max-w-5xl">
         <h1 className="text-3xl font-bold mt-2.5">About</h1>
         <p className="mt-6">
           I am a software engineer who is driven by creative problem solving,
