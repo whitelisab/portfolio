@@ -10,7 +10,8 @@ type Props = {
 
 const pages = [
   { name: 'Home', route: '/' },
-  { name: 'About', route: '/about' }
+  { name: 'About', route: '/about' },
+  { name: 'Talks', route: '/talks' }
 ];
 
 const meta = {
