@@ -1,5 +1,11 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Block, BLOCKS, Document, Inline } from '@contentful/rich-text-types';
+import {
+  Block,
+  BLOCKS,
+  Document,
+  Inline,
+  INLINES
+} from '@contentful/rich-text-types';
 import { createClient } from 'contentful';
 import { ReactNode } from 'react';
 import { FaFile } from 'react-icons/fa';
@@ -21,7 +27,19 @@ export default function About({ summary }: Props) {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (_: Block | Inline, children: ReactNode) => (
         <p className="mt-4">{children}</p>
-      )
+      ),
+      [INLINES.HYPERLINK]: (node: Block | Inline, children: ReactNode) => {
+        return (
+          <a
+            href={node.data.uri}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            {children}
+          </a>
+        );
+      }
     }
   };
 
