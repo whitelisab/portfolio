@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "check-format": "prettier --check .",
-    "check-types": "tsc --pretty --noEmit"
+    "check-types": "tsc --pretty --noEmit",
+    "generate:types": "contentful-typescript-codegen --output @types/generated/contentful.d.ts"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.16.2",
@@ -18,6 +19,7 @@
     "@types/react-dom": "18.0.9",
     "@vercel/analytics": "^0.1.6",
     "contentful": "^9.3.0",
+    "contentful-management": "^10.29.1",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "next": "13.0.6",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "contentful-typescript-codegen": "^3.4.0",
     "eslint-config-prettier": "^8.5.0",
     "postcss": "^8.4.19",
     "prettier": "^2.8.1",

@@ -1,16 +1,13 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
+import { Block, BLOCKS, Document, Inline } from '@contentful/rich-text-types';
 import { createClient } from 'contentful';
+import { ReactNode } from 'react';
 import { FaFile } from 'react-icons/fa';
+import { ISummary } from '../@types/generated/contentful';
 import Container from '../components/Container';
 
 type Props = {
-  summary: {
-    fields: {
-      content: Document;
-      title: string;
-    };
-  }[];
+  summary: ISummary[];
 };
 
 export default function About({ summary }: Props) {
@@ -22,7 +19,9 @@ export default function About({ summary }: Props) {
 
   const renderOptions = {
     renderNode: {
-      [BLOCKS.PARAGRAPH]: (_, children) => <p className="mt-4">{children}</p>
+      [BLOCKS.PARAGRAPH]: (_: Block | Inline, children: ReactNode) => (
+        <p className="mt-4">{children}</p>
+      )
     }
   };
 
@@ -30,9 +29,9 @@ export default function About({ summary }: Props) {
     <Container>
       <div className="flex flex-col justify-center px-8 text-neutral-800 max-w-5xl">
         <h1 className="text-3xl font-bold mt-2.5">About</h1>
-        {documentToReactComponents(aboutContent, renderOptions)}
+        {documentToReactComponents(aboutContent as Document, renderOptions)}
         <h2 className="text-2xl font-bold mt-8">Work Experience</h2>
-        {documentToReactComponents(workContent, renderOptions)}
+        {documentToReactComponents(workContent as Document, renderOptions)}
         <div className="mt-6">
           <a
             href="https://drive.google.com/file/d/1KHaK8xFNUjJhE7CqUVI5YPsCxYQ6WnSD/view?usp=sharing"
@@ -61,7 +60,7 @@ export async function getStaticProps() {
       : ''
   });
 
-  const res = await client.getEntries({
+  const res = await client.getEntries<ISummary>({
     content_type: 'summary',
     'fields.title[in]': 'About,Work Experience'
   });

@@ -1,13 +1,10 @@
 import { createClient } from 'contentful';
 import Image from 'next/image';
+import { IHeadline } from '../@types/generated/contentful';
 import Container from '../components/Container';
 
 type Props = {
-  headline: {
-    fields: {
-      content: string[];
-    };
-  }[];
+  headline: IHeadline[];
 };
 
 export default function Home({ headline }: Props) {
@@ -54,7 +51,7 @@ export async function getStaticProps() {
       : ''
   });
 
-  const res = await client.getEntries({ content_type: 'headline' });
+  const res = await client.getEntries<IHeadline>({ content_type: 'headline' });
 
   return {
     props: {

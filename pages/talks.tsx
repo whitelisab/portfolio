@@ -1,27 +1,19 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
+import { Block, BLOCKS, Document, Inline } from '@contentful/rich-text-types';
 import { createClient } from 'contentful';
+import { ReactNode } from 'react';
 import {
   FaCalendarDay,
   FaExternalLinkAlt,
   FaGithub,
   FaMapMarkerAlt
 } from 'react-icons/fa';
+import { ISummary, ITalk } from '../@types/generated/contentful';
 import Container from '../components/Container';
 
 type Props = {
-  summary: {
-    fields: {
-      content: Document;
-      title: string;
-    };
-  };
-  talks: {
-    fields: {
-      content: Document;
-      title: string;
-    };
-  }[];
+  summary: ISummary;
+  talks: ITalk[];
 };
 
 export default function Talks({ summary, talks }: Props) {
@@ -29,7 +21,9 @@ export default function Talks({ summary, talks }: Props) {
 
   const renderOptions = {
     renderNode: {
-      [BLOCKS.PARAGRAPH]: (_, children) => <p className="mt-4">{children}</p>
+      [BLOCKS.PARAGRAPH]: (_: Block | Inline, children: ReactNode) => (
+        <p className="mt-4">{children}</p>
+      )
     }
   };
 
@@ -37,8 +31,10 @@ export default function Talks({ summary, talks }: Props) {
     <Container>
       <div className="flex flex-col justify-center px-8 text-neutral-800 max-w-5xl">
         <h1 className="text-3xl font-bold mt-2.5">Talks</h1>
-        {documentToReactComponents(talksSummary, renderOptions)}
+        {typeof talksSummary !== 'undefined' &&
+          documentToReactComponents(talksSummary, renderOptions)}
         {talks.map((talk) => {
+          const talkDocument = talk.fields.description as Document;
           return (
             <div className="mt-4" key={talk.sys.id}>
               <p className="font-bold">{talk.fields.title}</p>
@@ -74,7 +70,7 @@ export default function Talks({ summary, talks }: Props) {
                   </a>
                 </div>
               )}
-              {documentToReactComponents(talk.fields.description)}
+              {documentToReactComponents(talkDocument)}
             </div>
           );
         })}
@@ -93,9 +89,9 @@ export async function getStaticProps() {
       : ''
   });
 
-  const res1 = await client.getEntry('3ikrOFYB0XH5ANcggHBKDN');
+  const res1 = await client.getEntry<ISummary>('3ikrOFYB0XH5ANcggHBKDN');
 
-  const res2 = await client.getEntries({
+  const res2 = await client.getEntries<ITalk>({
     content_type: 'talk',
     order: '-fields.date'
   });
