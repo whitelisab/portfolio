@@ -1,6 +1,7 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Block, BLOCKS, Document, Inline } from '@contentful/rich-text-types';
 import { createClient } from 'contentful';
+import dayjs from 'dayjs';
 import { ReactNode } from 'react';
 import {
   FaCalendarDay,
@@ -29,7 +30,7 @@ export default function Talks({ summary, talks }: Props) {
 
   return (
     <Container>
-      <div className="flex flex-col justify-center px-8 text-neutral-800 max-w-5xl">
+      <div className="flex flex-col px-8 text-neutral-800 max-w-5xl">
         <h1 className="text-3xl font-bold mt-2.5">Talks</h1>
         {typeof talksSummary !== 'undefined' &&
           documentToReactComponents(talksSummary, renderOptions)}
@@ -44,7 +45,7 @@ export default function Talks({ summary, talks }: Props) {
               </div>
               <div className="flex items-center">
                 <FaCalendarDay className="mr-2" />
-                <p>{talk.fields.date}</p>
+                <p>{dayjs(talk.fields.date).format('MMMM D, YYYY')}</p>
               </div>
               <div className="flex items-center">
                 <FaExternalLinkAlt className="mr-2" />

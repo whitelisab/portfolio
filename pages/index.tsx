@@ -20,6 +20,7 @@ export default function Home({ headline }: Props) {
             className="rounded-full"
             width="200"
             height="200"
+            priority={true}
           />
           <h1 className="text-3xl font-bold text-neutral-800 mt-2.5">
             Lisa White

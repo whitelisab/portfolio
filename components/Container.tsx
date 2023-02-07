@@ -18,7 +18,7 @@ const meta = {
   title: 'Lisa White - Software Engineer',
   author: 'Lisa White',
   description:
-    'Focused on front-end development with JavaScript, React, Salesforce development, and a passionate career coach and educator',
+    'Focused on front end development (JavaScript, Typescript, React), Salesforce development, and a passionate career coach and educator',
   url: 'https://whitelisab.com',
   image: 'https://whitelisab.com/banner.png'
 };
@@ -68,7 +68,7 @@ export default function Container({ children }: Props) {
           pages={pages}
         />
         {overlayOpen && <MobileMenu pages={pages} />}
-        <main className="flex justify-center">{children}</main>
+        <main className="flex grow justify-center">{children}</main>
         <Footer />
       </div>
     </>

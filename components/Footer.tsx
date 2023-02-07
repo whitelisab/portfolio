@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="my-8">
       <div className="flex flex-col justify-center items-center">
-        <div className="flex justify-center items-center mb-2">
+        <div className="flex justify-center items-center mb-2 ml-2">
           <ul className="flex gap-4">
             <li className="w-6 h-6 opacity-70 hover:opacity-100 transition">
               <a href="mailto: whitelisab@gmail.com">

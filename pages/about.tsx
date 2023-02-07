@@ -27,7 +27,7 @@ export default function About({ summary }: Props) {
 
   return (
     <Container>
-      <div className="flex flex-col justify-center px-8 text-neutral-800 max-w-5xl">
+      <div className="flex flex-col px-8 text-neutral-800 max-w-5xl">
         <h1 className="text-3xl font-bold mt-2.5">About</h1>
         {documentToReactComponents(aboutContent as Document, renderOptions)}
         <h2 className="text-2xl font-bold mt-8">Work Experience</h2>
