@@ -10,14 +10,15 @@ type Props = {
 
 const pages = [
   { name: 'Home', route: '/' },
-  { name: 'About', route: '/about' }
+  { name: 'About', route: '/about' },
+  { name: 'Talks', route: '/talks' }
 ];
 
 const meta = {
   title: 'Lisa White - Software Engineer',
   author: 'Lisa White',
   description:
-    'Focused on front-end development with JavaScript, React, Salesforce development, and a passionate career coach and educator',
+    'Focused on front end (JavaScript, Typescript, React) and Salesforce development; also a passionate career coach and educator',
   url: 'https://whitelisab.com',
   image: 'https://whitelisab.com/banner.png'
 };
@@ -67,7 +68,7 @@ export default function Container({ children }: Props) {
           pages={pages}
         />
         {overlayOpen && <MobileMenu pages={pages} />}
-        <main className="flex justify-center">{children}</main>
+        <main className="flex grow justify-center">{children}</main>
         <Footer />
       </div>
     </>
